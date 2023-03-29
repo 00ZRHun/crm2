@@ -558,10 +558,10 @@ if (mysqli_query($conn, $customer_expenses_table)) {
 															<td><input type="checkbox" name="cross_check[<?php echo $card_id; ?>]" value="1" /></td>
 															<td><input type="checkbox" name="clear_payment[<?php echo $card_id; ?>]" value="1" /></td>
 															<td>
-																<div align="right"><input name="collection[<?php echo $card_id; ?>][amount]" type="text" id="amount" value="<?php echo $amount = $row['amount'] != '' ? $row['amount'] : 0; ?>"></div>
+																<div align="right"><input name="collection[<?php echo $card_id; ?>][amount]" type="text" id="amount" value="<?php echo $amount = $row['amount'] ?? 0; ?>"></div>
 															</td>
 															<td>
-																<div align="right"><input name="collection[<?php echo $card_id; ?>][interest]" type="text" id="interest" value="<?php echo $interest = $row['interest'] != '' ? $row['interest'] : 0; ?>"></div>
+																<div align="right"><input name="collection[<?php echo $card_id; ?>][interest]" type="text" id="interest" value="<?php echo $interest = $row['interest'] ?? 0; ?>"></div>
 															</td>
 															<?php
 															if ($t_center_id != 5) { ?>
