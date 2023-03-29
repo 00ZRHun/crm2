@@ -99,14 +99,14 @@ date_default_timezone_set("Asia/Kuala_Lumpur");
                   <li><a href="inquiry_list.php"><i class="fa fa-plus"></i>Inquiry List</a></li>
                   <!-- <li><a href="loan_list.php"><i class="fa fa-plus"></i>Loan List</a></li> -->
                   <?php } else {
-                  $sql = "SELECT * FROM function_authorized WHERE center_id = '" . $_SESSION['center_id'] . "' AND function = 'Customer Card' ORDER BY date_time DESC LIMIT 1;";
+                  $sql = "SELECT * FROM function_authorized WHERE center_id = '" . $_SESSION['center_id'] . "' AND `function` = 'Customer Card' ORDER BY date_time DESC LIMIT 1;";
                   $res = mysqli_query($conn, $sql);
                   $myrow = mysqli_fetch_assoc($res);
                   if ($myrow['status'] == 1) { ?>
                     <li><a href="register_new_customer.php"><i class="fa fa-plus"></i>Register New Customer</a></li>
                     <li><a href="customer_card.php"><i class="fa fa-plus"></i>Customer Card</a></li>
                     <?php  }
-                  $sql = "SELECT * FROM function_authorized WHERE center_id = '" . $_SESSION['center_id'] . "' AND function = 'Customer' ORDER BY date_time DESC LIMIT 1;";
+                  $sql = "SELECT * FROM function_authorized WHERE center_id = '" . $_SESSION['center_id'] . "' AND `function` = 'Customer' ORDER BY date_time DESC LIMIT 1;";
                   $res = mysqli_query($conn, $sql);
                   $myrow = mysqli_fetch_assoc($res);
                   if ($myrow['status'] == 1) {
@@ -118,7 +118,7 @@ date_default_timezone_set("Asia/Kuala_Lumpur");
                     <li><a href="customer.php"><i class="fa fa-plus"></i>Customer Card</a></li>
                     <?php }
 
-                  $sql = "SELECT * FROM function_authorized WHERE center_id = '" . $_SESSION['center_id'] . "' AND function = 'Order List' ORDER BY date_time DESC LIMIT 1;";
+                  $sql = "SELECT * FROM function_authorized WHERE center_id = '" . $_SESSION['center_id'] . "' AND `function` = 'Order List' ORDER BY date_time DESC LIMIT 1;";
                   $res = mysqli_query($conn, $sql);
                   $myrow = mysqli_fetch_assoc($res);
                   if ($myrow['status'] == 1) {
@@ -131,7 +131,7 @@ date_default_timezone_set("Asia/Kuala_Lumpur");
                     <?php }
                   }
 
-                  $sql = "SELECT * FROM function_authorized WHERE center_id = '" . $_SESSION['center_id'] . "' AND function = 'Collection' ORDER BY date_time DESC LIMIT 1;";
+                  $sql = "SELECT * FROM function_authorized WHERE center_id = '" . $_SESSION['center_id'] . "' AND `function` = 'Collection' ORDER BY date_time DESC LIMIT 1;";
                   $res = mysqli_query($conn, $sql);
                   $myrow = mysqli_fetch_assoc($res);
                   if ($myrow['status'] == 1) { ?>
@@ -140,7 +140,7 @@ date_default_timezone_set("Asia/Kuala_Lumpur");
                 } ?>
 
                 <?php
-                $sql = "SELECT * FROM function_authorized WHERE center_id = '" . $_SESSION['center_id'] . "' AND function = 'Monthly Report' ORDER BY date_time DESC LIMIT 1;";
+                $sql = "SELECT * FROM function_authorized WHERE center_id = '" . $_SESSION['center_id'] . "' AND `function` = 'Monthly Report' ORDER BY date_time DESC LIMIT 1;";
                 $res = mysqli_query($conn, $sql);
                 $myrow = mysqli_fetch_assoc($res);
                 if ($myrow['status'] == 1) { ?>
@@ -148,7 +148,7 @@ date_default_timezone_set("Asia/Kuala_Lumpur");
                 <?php  } ?>
 
                 <?php
-                $sql = "SELECT * FROM function_authorized WHERE center_id = '" . $_SESSION['center_id'] . "' AND function = 'Daily Report' ORDER BY date_time DESC LIMIT 1;";
+                $sql = "SELECT * FROM function_authorized WHERE center_id = '" . $_SESSION['center_id'] . "' AND `function` = 'Daily Report' ORDER BY date_time DESC LIMIT 1;";
                 $res = mysqli_query($conn, $sql);
                 $myrow = mysqli_fetch_assoc($res);
                 if ($myrow['status'] == 1) { ?>
@@ -156,7 +156,7 @@ date_default_timezone_set("Asia/Kuala_Lumpur");
                 <?php  } ?>
 
                 <?php
-                $sql = "SELECT * FROM function_authorized WHERE center_id = '" . $_SESSION['center_id'] . "' AND function = 'Uncollected Report' ORDER BY date_time DESC LIMIT 1;";
+                $sql = "SELECT * FROM function_authorized WHERE center_id = '" . $_SESSION['center_id'] . "' AND `function` = 'Uncollected Report' ORDER BY date_time DESC LIMIT 1;";
                 $res = mysqli_query($conn, $sql);
                 $myrow = mysqli_fetch_assoc($res);
                 if ($myrow['status'] == 1) { ?>
@@ -165,7 +165,7 @@ date_default_timezone_set("Asia/Kuala_Lumpur");
 
 
                 <?php
-                $sql = "SELECT * FROM function_authorized WHERE center_id = '" . $_SESSION['center_id'] . "' AND function = 'Customer Status Check' ORDER BY date_time DESC LIMIT 1;";
+                $sql = "SELECT * FROM function_authorized WHERE center_id = '" . $_SESSION['center_id'] . "' AND `function` = 'Customer Status Check' ORDER BY date_time DESC LIMIT 1;";
                 $res = mysqli_query($conn, $sql);
                 $myrow = mysqli_fetch_assoc($res);
                 if ($myrow['status'] == 1) { ?>
@@ -183,13 +183,13 @@ date_default_timezone_set("Asia/Kuala_Lumpur");
                 <?php
 
                 if ($_SESSION["group_name"] == 'admin') {
-                  $sql = "SELECT * FROM function_authorized WHERE center_id = '" . $_SESSION['center_id'] . "' AND function = 'User Maintenance' ORDER BY date_time DESC LIMIT 1;";
+                  $sql = "SELECT * FROM function_authorized WHERE center_id = '" . $_SESSION['center_id'] . "' AND `function` = 'User Maintenance' ORDER BY date_time DESC LIMIT 1;";
                   $res = mysqli_query($conn, $sql);
                   $myrow = mysqli_fetch_assoc($res);
                   if ($myrow['status'] == 1) { ?>
                     <li id="id_user_maintainance"><a href="user_maintenance.php"><i class="fa fa-plus"></i>User Management</a></li>
                   <?php }
-                  $sql = "SELECT * FROM function_authorized WHERE center_id = '" . $_SESSION['center_id'] . "' AND function = 'Product List' ORDER BY date_time DESC LIMIT 1;";
+                  $sql = "SELECT * FROM function_authorized WHERE center_id = '" . $_SESSION['center_id'] . "' AND `function` = 'Product List' ORDER BY date_time DESC LIMIT 1;";
                   $res = mysqli_query($conn, $sql);
                   $myrow = mysqli_fetch_assoc($res);
                   if ($myrow['status'] == 1) { ?>
