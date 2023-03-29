@@ -203,7 +203,7 @@ if (mysqli_query($conn, $customer_expenses_table)) {
 															<tbody>
 																<tr>
 																	<td><strong>Lock</strong></td>
-																	<td> <input type="submit" name="cmdLock" value="打開">
+																	<td> <input type="submit" name="cmdLock" value="Open"> <!-- OPT: 打開 -->
 																		<?php echo date('Y-m-d H:i:s'); ?> </td>
 																</tr>
 															</tbody>
@@ -214,16 +214,12 @@ if (mysqli_query($conn, $customer_expenses_table)) {
 														<table bgcolor="#00FF00">
 															<tbody>
 																<tr>
-
 																	<td><strong>Open</strong></td>
 																	<td>
-																		<input type="submit" name="cmdLock" value="關閉">
-
+																		<input type="submit" name="cmdLock" value="Lock"> <!-- OPT: 關閉 -->
 																	</td>
-
 																</tr>
 															</tbody>
-
 														</table>
 													<?php
 													}
@@ -236,6 +232,7 @@ if (mysqli_query($conn, $customer_expenses_table)) {
 													<div align="left">Date : <span class="SpecialHeader"><?php echo $d_startDay . '-' . $d_startMonth . '-' . $d_startYear; ?></span>
 														<!--<input name="d_date" type="hidden" id="d_date" value="2020-10-17">-->
 														<input name="d_date_disp" type="hidden" id="d_date_disp" value="<?php echo $d_startDay . '-' . $d_startMonth . '-' . $d_startYear; ?>">
+														<input name="d_startDate" type="hidden" value="<?= $_REQUEST['d_startDate'] ?>"> <!-- keep a copy of this value for 'open & lock' toggle btn -->
 													</div>
 												</td>
 												<td>&nbsp;</td>
