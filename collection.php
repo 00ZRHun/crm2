@@ -75,9 +75,19 @@ if (mysqli_query($conn, $customer_expenses_table)) {
 	<?php
 	if (isset($_REQUEST['Search']) || isset($_POST['confirm']) || isset($_POST['cmdLock'])) {
 		$t_center_id = $_REQUEST['t_center_id'];
-		$d_startDay = $_REQUEST['d_startDay'];
+
+		// use date-type input to improve ui
+		/* $d_startDay = $_REQUEST['d_startDay'];
 		$d_startMonth = $_REQUEST['d_startMonth'];
-		$d_startYear = $_REQUEST['d_startYear'];
+		$d_startYear = $_REQUEST['d_startYear']; */
+		$date_arr = explode("-", $_REQUEST['d_startDate']);   // Format: YYYY-mm-dd; Eg: 2023-03-29
+		$d_startDay = $date_arr[2];
+		$d_startMonth = $date_arr[1];
+		$d_startYear = $date_arr[0];
+		/* echo ('$d_startDate = ' . json_encode($d_startDate));   // D
+		echo ('$d_startDay = ' . $d_startDay);
+		echo ('$d_startMonth = ' . $d_startMonth);
+		echo ('$d_startYear = ' . $d_startYear); */
 
 		if (isset($_POST['confirm'])) { //echo $d_startDay ;
 
@@ -820,7 +830,7 @@ if (mysqli_query($conn, $customer_expenses_table)) {
 					<div class="col-md-2">
 						<label>Date:</label>
 					</div>
-					<div class="col-md-6" style="padding-left: 0px;padding-right: 0px;">
+					<!-- <div class="col-md-6" style="padding-left: 0px;padding-right: 0px;">
 
 						<div class="col-md-4">
 
@@ -875,6 +885,10 @@ if (mysqli_query($conn, $customer_expenses_table)) {
 							</select>
 						</div>
 
+					</div> -->
+					<!-- use date-type input to improve ui  -->
+					<div class="col-md-6">
+						<input type="date" name="d_startDate" class="form-control" style="width:50%;" value="<?= date('Y-m-d') ?>" required>
 					</div>
 					<div class="col-md-2"></div>
 				</div>
