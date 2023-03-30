@@ -43,7 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		</div><!-- /.container-fluid -->
 	</section>
 	<?php
-	if ($report == "rpt01") { ?>
+	if (isset($report) && $report == "rpt01") { ?>
 		<section>
 			<div class="">
 				<p><strong>
@@ -552,7 +552,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 		</section>
 	<?php
-	} elseif ($report == "rpt02") {
+	} elseif (isset($report) && $report == "rpt02") {
 		$totalcollection = 0;
 		$date = $d_startDay . '-' . $d_startMonth . '-' . $d_startYear;
 		//$previousdate =  $dateselected=($d_startDay-1).'-'.$d_startMonth.'-'.$d_startYear;
@@ -1047,7 +1047,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 				</table>
 			</form>
 		</section>
-	<?php } elseif ($report == "rpt03") {
+	<?php } elseif (isset($report) && $report == "rpt03") {
 		$d_startDay = $_POST['d_startDay'];
 		$d_startMonth = $_POST['d_startMonth'];
 		$d_startYear = $_POST['d_startYear'];
@@ -1233,7 +1233,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 				</tbody>
 			</table>
 		</section>
-	<?php } elseif ($report == "rpt04") {
+	<?php } elseif (isset($report) && $report == "rpt04") {
 		$d_startDay = $_POST['d_startDay'];
 		$d_startMonth = $_POST['d_startMonth'];
 		$d_startYear = $_POST['d_startYear'];
@@ -1497,7 +1497,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 				</tbody>
 			</table>
 		</section>
-	<?php } elseif ($report == "rpt05") {
+	<?php } elseif (isset($report) && $report == "rpt05") {
 		$d_startDay = $_POST['d_startDay'];
 		$d_startMonth = $_POST['d_startMonth'];
 		$d_startYear = $_POST['d_startYear'];
@@ -1649,7 +1649,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 				</tbody>
 			</table>
 		</section>
-	<?php } elseif ($report == "rpt06") {
+	<?php } elseif (isset($report) && $report == "rpt06") {
 		$d_startDay = $_POST['d_startDay'];
 		$d_startMonth = $_POST['d_startMonth'];
 		$d_startYear = $_POST['d_startYear'];
