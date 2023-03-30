@@ -16,7 +16,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	}
 
 	$t_center_id = $_POST['t_center_id'];
-	$all_center = $_POST['all_center'];
+	if (isset($_POST['all_center']))
+		$all_center = $_POST['all_center'];
 	$d_startDay = $_POST['d_startDay'];
 	$d_startMonth = $_POST['d_startMonth'];
 	$d_startYear = $_POST['d_startYear'];
