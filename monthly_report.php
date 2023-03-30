@@ -43,7 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		</div><!-- /.container-fluid -->
 	</section>
 	<?php
-	if ($report == "rpt01") { ?>
+	if (isset($report) && $report == "rpt01") { ?>
 
 
 
@@ -566,7 +566,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 		<?php
-	} elseif ($report == "rpt02") {
+	} elseif (isset($report) && $report == "rpt02") {
 		if ($_SESSION['center_id'] != 5) {
 		?>
 
@@ -1192,7 +1192,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 		<?php }
-	} elseif ($report == "rpt03") {
+	} elseif (isset($report) && $report == "rpt03") {
 		$d_startMonth = $_POST['d_startMonth'];
 		$d_startYear = $_POST['d_startYear'];
 		?>
@@ -1386,7 +1386,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 
-	<?php } elseif ($report == "rpt04") {
+	<?php } elseif (isset($report) && $report == "rpt04") {
 		$d_startMonth = $_POST['d_startMonth'];
 		$d_startYear = $_POST['d_startYear'];
 	?>
@@ -1659,7 +1659,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 
-	<?php } elseif ($report == "rpt05") {
+	<?php } elseif (isset($report) && $report == "rpt05") {
 		$d_startMonth = $_POST['d_startMonth'];
 		$d_startYear = $_POST['d_startYear'];
 	?>
@@ -1867,7 +1867,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 
-	<?php } elseif ($report == "rpt06") {
+	<?php } elseif (isset($report) && $report == "rpt06") {
 		$d_startMonth = $_POST['d_startMonth'];
 		$d_startYear = $_POST['d_startYear'];
 	?>
