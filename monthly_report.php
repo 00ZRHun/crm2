@@ -257,15 +257,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 										<th style="min-width: 50px; width:50px;">Day <br>18</th>
 										<th style="min-width: 50px; width:50px;">Day <br>19</th>
 										<th style="min-width: 50px; width:50px;">Day <br>20</th>
-										<th style="min-width: 50px; width:50px;">Day <br>31</th>
-										<th style="min-width: 50px; width:50px;">Day <br>32</th>
-										<th style="min-width: 50px; width:50px;">Day <br>33</th>
-										<th style="min-width: 50px; width:50px;">Day <br>34</th>
-										<th style="min-width: 50px; width:50px;">Day <br>35</th>
-										<th style="min-width: 50px; width:50px;">Day <br>36</th>
-										<th style="min-width: 50px; width:50px;">Day <br>37</th>
-										<th style="min-width: 50px; width:50px;">Day <br>38</th>
-										<th style="min-width: 50px; width:50px;">Day <br>39</th>
+										<th style="min-width: 50px; width:50px;">Day <br>21</th>
+										<th style="min-width: 50px; width:50px;">Day <br>22</th>
+										<th style="min-width: 50px; width:50px;">Day <br>23</th>
+										<th style="min-width: 50px; width:50px;">Day <br>24</th>
+										<th style="min-width: 50px; width:50px;">Day <br>25</th>
+										<th style="min-width: 50px; width:50px;">Day <br>26</th>
+										<th style="min-width: 50px; width:50px;">Day <br>27</th>
+										<th style="min-width: 50px; width:50px;">Day <br>28</th>
+										<th style="min-width: 50px; width:50px;">Day <br>29</th>
 										<th style="min-width: 50px; width:50px;">Day <br>30</th>
 										<th style="min-width: 50px; width:50px;">Day <br>31</th>
 									</tr>
