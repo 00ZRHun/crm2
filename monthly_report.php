@@ -46,13 +46,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	<?php
 	if (isset($report) && $report == "rpt01") { ?>
 
-
-
-
-
-
-
-
 		<section>
 			<div class="">
 				<p><strong>
@@ -60,6 +53,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 					Monthly Report<span class="ConfirmValue"> </span></p>
 			</div>
 			<a href="monthly_report.php" class="btn btn-info">Back</a>
+			<!-- <a class="btn btn-info">Back2</a> -->
+			<!-- export table to excel START -->
+			<a onclick="ExportToExcel('xlsx')" class="btn btn-info" style="float: right; color: white;">Export to Excel</a>
+
+			<script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
+			<script>
+				function ExportToExcel(type, fn, dl) {
+					var elt = document.getElementById('tbl_exporttable_to_xls');
+					var wb = XLSX.utils.table_to_book(elt, {
+						sheet: "sheet1"
+					});
+					return dl ?
+						XLSX.write(wb, {
+							bookType: type,
+							bookSST: true,
+							type: 'base64'
+						}) :
+						XLSX.writeFile(wb, fn || ('MonthlyReport.' + (type || 'xlsx'))); // OPT: MySheetName
+
+				}
+			</script>
+			<!-- export table to excel END -->
+
 			<?php
 			if ($_SESSION['center_id'] == 5) { ?>
 				<form method="post">
@@ -120,10 +136,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 										<?php echo $rows['id'] . ' - ' . $rows['center_name']; ?>
 									</strong> </span></p>
 						</div>
-						<table cellspacing="1" cellpadding="1" style="width:80%" class="table table-striped table-bordered" align="center">
+						<table cellspacing="1" cellpadding="1" style="width:80%; margin-bottom: 0%;" class="table table-striped table-bordered" align="center">
 							<caption class="menu-header">Monthly Collection Report</caption>
 							<?php if ($_SESSION['center_id'] != 5) { ?>
-								<thead>
+
+								<!-- PREV VERS START -->
+								<!-- <thead>
 									<tr>
 										<th>Customer - Card</th>
 										<th>Customer Name</th>
@@ -199,136 +217,293 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 									<?php
 									}
 									?>
-								</tbody>
-							<?php } else { ?>
+								</tbody> -->
+								<!-- PREV VERS END -->
+
+						</table>
+
+						<!-- table w freeze header & few cols START -->
+						<div style="width: 80%; height: 500px; overflow: auto; margin-left: auto; margin-right: auto;" class="table table-striped table-bordered"> <!-- OPT: width: 500px, margin-left: 50px, border: 1px solid; -->
+							<table id="tbl_exporttable_to_xls" class="freeze-table" width="700px">
+								<!-- <table cellspacing="1" cellpadding="1" style="width:80%" class="freeze-table table table-striped table-bordered" align="center"> -->
 								<thead>
 									<tr>
-										<th>Date</th>
-										<th>Lend Date</th>
-										<th>Code</th>
-										<th>Lend Amount</th>
-										<th>Interest</th>
-										<th>Deposit</th>
-										<th>STP</th>
-										<th>On Hand</th>
-										<th>Days</th>
-										<th>Deadline</th>
-										<th>Statement Date</th>
-										<th>Dealer</th>
-										<th>Repayment Amount</th>
-										<th>Repayment Interest</th>
-										<th>Remark</th>
+										<!-- <th style="min-width: 75px; width:75px;" class="col-id-no fixed-header">Id Number</th>
+												<th style="min-width: 100px; width:100px;" class="col-first-name fixed-header">First Name</th>
+												<th style="min-width: 100px; width:100px;">Last Name</th>
+												<th style="min-width: 300px; width:300px;">Address</th>
+												<th style="min-width: 100px; width: 100px;">Phone</th>
+												<th style="min-width: 75px; width:75px;">DOB</th> -->
+										<th style="min-width: 100px; width:100px;" class="col-id-no fixed-header">Customer - Card</td>
+										<th style="min-width: 100px; width:100px;" class="col-first-name fixed-header">Customer Name</td>
+										<th style="min-width: 100px; width:100px;" class="col-second-name fixed-header">Phone</td>
+										<th style="min-width: 50px; width:50px;">Day <br>1</th>
+										<th style="min-width: 50px; width:50px;">Day <br>2</th>
+										<th style="min-width: 50px; width:50px;">Day <br>3</th>
+										<th style="min-width: 50px; width:50px;">Day <br>4</th>
+										<th style="min-width: 50px; width:50px;">Day <br>5</th>
+										<th style="min-width: 50px; width:50px;">Day <br>6</th>
+										<th style="min-width: 50px; width:50px;">Day <br>7</th>
+										<th style="min-width: 50px; width:50px;">Day <br>8</th>
+										<th style="min-width: 50px; width:50px;">Day <br>9</th>
+										<th style="min-width: 50px; width:50px;">Day <br>10</th>
+										<th style="min-width: 50px; width:50px;">Day <br>11</th>
+										<th style="min-width: 50px; width:50px;">Day <br>12</th>
+										<th style="min-width: 50px; width:50px;">Day <br>13</th>
+										<th style="min-width: 50px; width:50px;">Day <br>14</th>
+										<th style="min-width: 50px; width:50px;">Day <br>15</th>
+										<th style="min-width: 50px; width:50px;">Day <br>16</th>
+										<th style="min-width: 50px; width:50px;">Day <br>17</th>
+										<th style="min-width: 50px; width:50px;">Day <br>18</th>
+										<th style="min-width: 50px; width:50px;">Day <br>19</th>
+										<th style="min-width: 50px; width:50px;">Day <br>20</th>
+										<th style="min-width: 50px; width:50px;">Day <br>31</th>
+										<th style="min-width: 50px; width:50px;">Day <br>32</th>
+										<th style="min-width: 50px; width:50px;">Day <br>33</th>
+										<th style="min-width: 50px; width:50px;">Day <br>34</th>
+										<th style="min-width: 50px; width:50px;">Day <br>35</th>
+										<th style="min-width: 50px; width:50px;">Day <br>36</th>
+										<th style="min-width: 50px; width:50px;">Day <br>37</th>
+										<th style="min-width: 50px; width:50px;">Day <br>38</th>
+										<th style="min-width: 50px; width:50px;">Day <br>39</th>
+										<th style="min-width: 50px; width:50px;">Day <br>30</th>
+										<th style="min-width: 50px; width:50px;">Day <br>31</th>
 									</tr>
 								</thead>
+
 								<tbody>
 									<?php
-									$total_loan_out = 0;
-									$total_profit = 0;
-									$total_deposit = 0;
-									$total_advance = 0;
-									$total_onhand = 0;
-									$total_amount_paid = 0;
-									$total_profit_paid = 0;
 
-									if ($_SESSION['group_name'] != "admin") {
-										if ((isset($searchText) && $searchText != "") && (isset($searchDate) && $searchDate != "")) {
-											$sql = "SELECT a.*, c.user_name FROM collection AS a LEFT JOIN customers_card AS b ON a.card_id = b.id LEFT JOIN users AS c ON b.user_agent_id = c.id WHERE a.center_id = '5' AND b.user_agent_id = '" . $_SESSION['user_agent_id'] . "' AND (b.start_date LIKE '%" . $searchDate . "%' OR b.crossed_date LIKE '%" . $searchDate . "%' OR b.code LIKE '%" . $searchText . "%' OR c.user_name LIKE '%" . $searchText . "%') ORDER BY a.d_date_disp;";
-										} elseif (isset($searchText) && $searchText != "") {
-											$sql = "SELECT a.*, c.user_name FROM collection AS a LEFT JOIN customers_card AS b ON a.card_id = b.id LEFT JOIN users AS c ON b.user_agent_id = c.id WHERE a.center_id = '5' AND b.user_agent_id = '" . $_SESSION['user_agent_id'] . "' AND (b.code LIKE '%" . $searchText . "%' OR c.user_name LIKE '%" . $searchText . "%') ORDER BY a.d_date_disp;";
-										} elseif (isset($searchDate) && $searchDate != "") {
-											$sql = "SELECT a.*, c.user_name FROM collection AS a LEFT JOIN customers_card AS b ON a.card_id = b.id LEFT JOIN users AS c ON b.user_agent_id = c.id WHERE a.center_id = '5' AND b.user_agent_id = '" . $_SESSION['user_agent_id'] . "' AND (b.start_date LIKE '%" . $searchDate . "%' OR b.crossed_date LIKE '%" . $searchDate . "%') ORDER BY a.d_date_disp;";
-										} else {
-											$sql = "SELECT a.* FROM collection AS a LEFT JOIN customers_card AS b ON a.card_id = b.id WHERE a.center_id = '5' AND b.user_agent_id = '" . $_SESSION['user_agent_id'] . "' ORDER BY a.d_date_disp;";
-										}
-									} else {
-										if ((isset($searchText) && $searchText != "") && (isset($searchDate) && $searchDate != "")) {
-											$sql = "SELECT a.*, c.user_name FROM collection AS a LEFT JOIN customers_card AS b ON a.card_id = b.id LEFT JOIN users AS c ON b.user_agent_id = c.id WHERE a.center_id = '5' AND (b.start_date LIKE '%" . $searchDate . "%' OR b.crossed_date LIKE '%" . $searchDate . "%' OR b.code LIKE '%" . $searchText . "%' OR c.user_name LIKE '%" . $searchText . "%') ORDER BY a.d_date_disp;";
-										} elseif (isset($searchText) && $searchText != "") {
-											$sql = "SELECT a.*, c.user_name FROM collection AS a LEFT JOIN customers_card AS b ON a.card_id = b.id LEFT JOIN users AS c ON b.user_agent_id = c.id WHERE a.center_id = '5' AND (b.code LIKE '%" . $searchText . "%' OR c.user_name LIKE '%" . $searchText . "%') ORDER BY a.d_date_disp;";
-										} elseif (isset($searchDate) && $searchDate != "") {
-											$sql = "SELECT a.*, c.user_name FROM collection AS a LEFT JOIN customers_card AS b ON a.card_id = b.id LEFT JOIN users AS c ON b.user_agent_id = c.id WHERE a.center_id = '5' AND (b.start_date LIKE '%" . $searchDate . "%' OR b.crossed_date LIKE '%" . $searchDate . "%') ORDER BY a.d_date_disp;";
-										} else {
-											$sql = "SELECT a.* FROM collection AS a LEFT JOIN customers_card AS b ON a.card_id = b.id WHERE a.center_id = '5' ORDER BY a.d_date_disp;";
+									$get_customer_card = mysqli_query($conn, 'SELECT * FROM customers_card WHERE center_id = ' . $rows['id'] . $where);
+									$customer_card_id = array();
+									if (mysqli_num_rows($get_customer_card) > 0) {
+										while ($customer_cardrow = mysqli_fetch_assoc($get_customer_card)) {
+											$customer_card_id[] = $customer_cardrow['id'];
 										}
 									}
+									$whereand_card = ' and card_id IN (' . implode(',', $customer_card_id) . ')';
 
-									$res = mysqli_query($conn, $sql);
-									while ($myrow = mysqli_fetch_array($res)) {
-										$date = date("d-m-Y", $myrow['d_date_disp']);
-										$d_date = explode("-", $date);
+									$sql_collection = "SELECT * FROM collection WHERE center_id = " . $t_center_id . $whereand_card . " ORDER BY id ASC";
 
-										if ($d_startMonth == $d_date[1] && $d_startYear == $d_date[2]) {
-											$total_amount_paid += $myrow['amount'];
-											$total_profit_paid += $myrow['interest'];
-											$onhand = 0;
-											$sql2 = "SELECT * FROM customers_card WHERE id = '" . $myrow['card_id'] . "';";
-											$res2 = mysqli_query($conn, $sql2);
-											$myrow2 = mysqli_fetch_assoc($res2);
+									$sql_collection = "SELECT * FROM collection WHERE center_id = " . $rows['id'] . " ORDER BY id ASC";
 
-											$onhand = $myrow2['loan_out'] - $myrow2['profit'] - $myrow2['deposit'] - $myrow2['advance'];
-											$total_loan_out += $myrow2['loan_out'];
-											$total_profit += $myrow2['profit'];
-											$total_deposit += $myrow2['deposit'];
-											$total_advance += $myrow2['advance'];
-											$total_onhand += $onhand;
+									$resultcollection = mysqli_query($conn, $sql_collection);
+
+									if ($resultcollection->num_rows > 0) {
+
+										$total_colletion = 0;
+										$total_interest = 0;
+										while ($rowss = $resultcollection->fetch_assoc()) {
+											$date_hwe = date('d-m-Y', $rowss['d_date_disp']);
+											$date = explode("-", $date_hwe);
+											if ($date[1] == $d_startMonth &&  $date[2] == $d_startYear) {
+												$total_colletion += $rowss['amount'];
+												$total_interest += $rowss['interest'];
+
 									?>
-											<tr>
-												<td><?php echo date("d-m-Y", $myrow['d_date_disp']); ?></td>
-												<td><?php echo $myrow2['start_date']; ?></td>
-												<td><?php echo $myrow2['code']; ?></td>
-												<td><?php echo $myrow2['loan_out']; ?></td>
-												<td><?php echo $myrow2['profit']; ?></td>
-												<td><?php echo $myrow2['deposit']; ?></td>
-												<td><?php echo $myrow2['advance']; ?></td>
-												<td><?php echo $onhand; ?></td>
-												<td><?php echo $myrow2['no_of_terms']; ?></td>
-												<td><?php echo $myrow2['crossed_date']; ?></td>
-												<td>
+												<tr>
+													<td class="col-id-no" scope="row"> <!-- OPT: 35-64 -->
+														<?php
+														$sql_customer_id = "SELECT customer_id FROM customers_card WHERE id = " . $rowss['card_id'];
+														$res = mysqli_query($conn, $sql_customer_id);
 
-													<?php
-													if ($myrow2['clear_payment'] != '1') {
-													} else {
-														$sql3 = "SELECT * FROM collection WHERE card_id = '" . $myrow2['id'] . "' AND remark1 = '清' ORDER BY id DESC LIMIT 1;";
-														$res3 = mysqli_query($conn, $sql3);
-														$myrow3 = mysqli_fetch_assoc($res3);
+														if ($res->num_rows > 0) {
+															$row_res = $res->fetch_assoc();
+															echo $row_res['customer_id'] . '-';
+														}
+														$customer_id = $row_res['customer_id'];
 
-														echo date("d-m-Y", $myrow3['d_date_disp']);
-													}
+														$customer_data = "SELECT * FROM customers WHERE id = " . $customer_id;
+														$cust_data = mysqli_query($conn, $customer_data);
+														$customer = $cust_data->fetch_assoc();
 
-													$sql3 = "SELECT * FROM users WHERE id = '" . $myrow2['user_agent_id'] . "';";
+
+														echo $rowss['card_id']; ?>
+													</td>
+													<td class="col-first-name" scope="row"><?= $customer['name'] ?></td> <!-- OPT: test user -->
+													<td class="col-second-name" scope="row"><?= $customer['telephone_1'] ?></td> <!-- OPT: 01234567890 -->
+													<td><?= $date[0] == 1 ? $total : '-' ?></td> <!-- OPT: 1 -->
+													<td><?= $date[0] == 2 ? $total : '-' ?></td> <!-- OPT: 2 -->
+													<td><?= $date[0] == 3 ? $total : '-' ?></td> <!-- OPT: 3 -->
+													<td><?= $date[0] == 4 ? $total : '-' ?></td> <!-- OPT: 4 -->
+													<td><?= $date[0] == 5 ? $total : '-' ?></td> <!-- OPT: 5 -->
+													<td><?= $date[0] == 6 ? $total : '-' ?></td> <!-- OPT: 6 -->
+													<td><?= $date[0] == 7 ? $total : '-' ?></td> <!-- OPT: 7 -->
+													<td><?= $date[0] == 8 ? $total : '-' ?></td> <!-- OPT: 8 -->
+													<td><?= $date[0] == 9 ? $total : '-' ?></td> <!-- OPT: 9 -->
+													<td><?= $date[0] == 10 ? $total : '-' ?></td> <!-- OPT: 10 -->
+													<td><?= $date[0] == 11 ? $total : '-' ?></td> <!-- OPT: 11 -->
+													<td><?= $date[0] == 12 ? $total : '-' ?></td> <!-- OPT: 12 -->
+													<td><?= $date[0] == 13 ? $total : '-' ?></td> <!-- OPT: 13 -->
+													<td><?= $date[0] == 14 ? $total : '-' ?></td> <!-- OPT: 14 -->
+													<td><?= $date[0] == 15 ? $total : '-' ?></td> <!-- OPT: 15 -->
+													<td><?= $date[0] == 16 ? $total : '-' ?></td> <!-- OPT: 16 -->
+													<td><?= $date[0] == 17 ? $total : '-' ?></td> <!-- OPT: 17 -->
+													<td><?= $date[0] == 18 ? $total : '-' ?></td> <!-- OPT: 18 -->
+													<td><?= $date[0] == 19 ? $total : '-' ?></td> <!-- OPT: 19 -->
+													<td><?= $date[0] == 20 ? $total : '-' ?></td> <!-- OPT: 20 -->
+													<td><?= $date[0] == 31 ? $total : '-' ?></td> <!-- OPT: 31 -->
+													<td><?= $date[0] == 32 ? $total : '-' ?></td> <!-- OPT: 32 -->
+													<td><?= $date[0] == 33 ? $total : '-' ?></td> <!-- OPT: 33 -->
+													<td><?= $date[0] == 34 ? $total : '-' ?></td> <!-- OPT: 34 -->
+													<td><?= $date[0] == 35 ? $total : '-' ?></td> <!-- OPT: 35 -->
+													<td><?= $date[0] == 36 ? $total : '-' ?></td> <!-- OPT: 36 -->
+													<td><?= $date[0] == 37 ? $total : '-' ?></td> <!-- OPT: 37 -->
+													<td><?= $date[0] == 38 ? $total : '-' ?></td> <!-- OPT: 38 -->
+													<td><?= $date[0] == 39 ? $total : '-' ?></td> <!-- OPT: 39 -->
+													<td><?= $date[0] == 30 ? $total : '-' ?></td> <!-- OPT: 30 -->
+													<td><?= $date[0] == 31 ? $total : '-' ?></td> <!-- OPT: 31 -->
+												</tr>
+										<?php
+											}
+										}
+										?>
+										<tr>
+											<td class="col-id-no" scope="row" colspan="2">Total (Collection + Interest): </td>
+											<td class="col-second-name" scope="row"><?= $total_colletion + $total_interest ?></td>
+											<td scope="row" colspan="31"></td>
+											<!-- <td><?php echo $total_colletion; ?></td>
+													<td><?php echo $total_interest; ?></td> -->
+										</tr>
+									<?php
+									}
+									?>
+								</tbody>
+							</table>
+						</div>
+						<!-- table w freeze header & few cols END -->
+
+						<table>
+
+						<?php } else { ?>
+							<thead>
+								<tr>
+									<th>Date</th>
+									<th>Lend Date</th>
+									<th>Code</th>
+									<th>Lend Amount</th>
+									<th>Interest</th>
+									<th>Deposit</th>
+									<th>STP</th>
+									<th>On Hand</th>
+									<th>Days</th>
+									<th>Deadline</th>
+									<th>Statement Date</th>
+									<th>Dealer</th>
+									<th>Repayment Amount</th>
+									<th>Repayment Interest</th>
+									<th>Remark</th>
+								</tr>
+							</thead>
+							<tbody>
+								<?php
+								$total_loan_out = 0;
+								$total_profit = 0;
+								$total_deposit = 0;
+								$total_advance = 0;
+								$total_onhand = 0;
+								$total_amount_paid = 0;
+								$total_profit_paid = 0;
+
+								if ($_SESSION['group_name'] != "admin") {
+									if ((isset($searchText) && $searchText != "") && (isset($searchDate) && $searchDate != "")) {
+										$sql = "SELECT a.*, c.user_name FROM collection AS a LEFT JOIN customers_card AS b ON a.card_id = b.id LEFT JOIN users AS c ON b.user_agent_id = c.id WHERE a.center_id = '5' AND b.user_agent_id = '" . $_SESSION['user_agent_id'] . "' AND (b.start_date LIKE '%" . $searchDate . "%' OR b.crossed_date LIKE '%" . $searchDate . "%' OR b.code LIKE '%" . $searchText . "%' OR c.user_name LIKE '%" . $searchText . "%') ORDER BY a.d_date_disp;";
+									} elseif (isset($searchText) && $searchText != "") {
+										$sql = "SELECT a.*, c.user_name FROM collection AS a LEFT JOIN customers_card AS b ON a.card_id = b.id LEFT JOIN users AS c ON b.user_agent_id = c.id WHERE a.center_id = '5' AND b.user_agent_id = '" . $_SESSION['user_agent_id'] . "' AND (b.code LIKE '%" . $searchText . "%' OR c.user_name LIKE '%" . $searchText . "%') ORDER BY a.d_date_disp;";
+									} elseif (isset($searchDate) && $searchDate != "") {
+										$sql = "SELECT a.*, c.user_name FROM collection AS a LEFT JOIN customers_card AS b ON a.card_id = b.id LEFT JOIN users AS c ON b.user_agent_id = c.id WHERE a.center_id = '5' AND b.user_agent_id = '" . $_SESSION['user_agent_id'] . "' AND (b.start_date LIKE '%" . $searchDate . "%' OR b.crossed_date LIKE '%" . $searchDate . "%') ORDER BY a.d_date_disp;";
+									} else {
+										$sql = "SELECT a.* FROM collection AS a LEFT JOIN customers_card AS b ON a.card_id = b.id WHERE a.center_id = '5' AND b.user_agent_id = '" . $_SESSION['user_agent_id'] . "' ORDER BY a.d_date_disp;";
+									}
+								} else {
+									if ((isset($searchText) && $searchText != "") && (isset($searchDate) && $searchDate != "")) {
+										$sql = "SELECT a.*, c.user_name FROM collection AS a LEFT JOIN customers_card AS b ON a.card_id = b.id LEFT JOIN users AS c ON b.user_agent_id = c.id WHERE a.center_id = '5' AND (b.start_date LIKE '%" . $searchDate . "%' OR b.crossed_date LIKE '%" . $searchDate . "%' OR b.code LIKE '%" . $searchText . "%' OR c.user_name LIKE '%" . $searchText . "%') ORDER BY a.d_date_disp;";
+									} elseif (isset($searchText) && $searchText != "") {
+										$sql = "SELECT a.*, c.user_name FROM collection AS a LEFT JOIN customers_card AS b ON a.card_id = b.id LEFT JOIN users AS c ON b.user_agent_id = c.id WHERE a.center_id = '5' AND (b.code LIKE '%" . $searchText . "%' OR c.user_name LIKE '%" . $searchText . "%') ORDER BY a.d_date_disp;";
+									} elseif (isset($searchDate) && $searchDate != "") {
+										$sql = "SELECT a.*, c.user_name FROM collection AS a LEFT JOIN customers_card AS b ON a.card_id = b.id LEFT JOIN users AS c ON b.user_agent_id = c.id WHERE a.center_id = '5' AND (b.start_date LIKE '%" . $searchDate . "%' OR b.crossed_date LIKE '%" . $searchDate . "%') ORDER BY a.d_date_disp;";
+									} else {
+										$sql = "SELECT a.* FROM collection AS a LEFT JOIN customers_card AS b ON a.card_id = b.id WHERE a.center_id = '5' ORDER BY a.d_date_disp;";
+									}
+								}
+
+								$res = mysqli_query($conn, $sql);
+								while ($myrow = mysqli_fetch_array($res)) {
+									$date = date("d-m-Y", $myrow['d_date_disp']);
+									$d_date = explode("-", $date);
+
+									if ($d_startMonth == $d_date[1] && $d_startYear == $d_date[2]) {
+										$total_amount_paid += $myrow['amount'];
+										$total_profit_paid += $myrow['interest'];
+										$onhand = 0;
+										$sql2 = "SELECT * FROM customers_card WHERE id = '" . $myrow['card_id'] . "';";
+										$res2 = mysqli_query($conn, $sql2);
+										$myrow2 = mysqli_fetch_assoc($res2);
+
+										$onhand = $myrow2['loan_out'] - $myrow2['profit'] - $myrow2['deposit'] - $myrow2['advance'];
+										$total_loan_out += $myrow2['loan_out'];
+										$total_profit += $myrow2['profit'];
+										$total_deposit += $myrow2['deposit'];
+										$total_advance += $myrow2['advance'];
+										$total_onhand += $onhand;
+								?>
+										<tr>
+											<td><?php echo date("d-m-Y", $myrow['d_date_disp']); ?></td>
+											<td><?php echo $myrow2['start_date']; ?></td>
+											<td><?php echo $myrow2['code']; ?></td>
+											<td><?php echo $myrow2['loan_out']; ?></td>
+											<td><?php echo $myrow2['profit']; ?></td>
+											<td><?php echo $myrow2['deposit']; ?></td>
+											<td><?php echo $myrow2['advance']; ?></td>
+											<td><?php echo $onhand; ?></td>
+											<td><?php echo $myrow2['no_of_terms']; ?></td>
+											<td><?php echo $myrow2['crossed_date']; ?></td>
+											<td>
+
+												<?php
+												if ($myrow2['clear_payment'] != '1') {
+												} else {
+													$sql3 = "SELECT * FROM collection WHERE card_id = '" . $myrow2['id'] . "' AND remark1 = '清' ORDER BY id DESC LIMIT 1;";
 													$res3 = mysqli_query($conn, $sql3);
 													$myrow3 = mysqli_fetch_assoc($res3);
-													?>
 
-												</td>
+													echo date("d-m-Y", $myrow3['d_date_disp']);
+												}
 
-												<td><?php echo $myrow3['user_name']; ?></td>
-												<td><?php echo $myrow['amount']; ?></td>
-												<td><?php echo $myrow['interest']; ?></td>
-												<td><?php echo $myrow['remark1'];
-													if ($myrow['remark1'] == "分期" || $myrow['remark1'] == "分天") {
-														echo $myrow['days'];
-													} ?></td>
-											</tr>
-									<?php
-										}
+												$sql3 = "SELECT * FROM users WHERE id = '" . $myrow2['user_agent_id'] . "';";
+												$res3 = mysqli_query($conn, $sql3);
+												$myrow3 = mysqli_fetch_assoc($res3);
+												?>
+
+											</td>
+
+											<td><?php echo $myrow3['user_name']; ?></td>
+											<td><?php echo $myrow['amount']; ?></td>
+											<td><?php echo $myrow['interest']; ?></td>
+											<td><?php echo $myrow['remark1'];
+												if ($myrow['remark1'] == "分期" || $myrow['remark1'] == "分天") {
+													echo $myrow['days'];
+												} ?></td>
+										</tr>
+								<?php
 									}
-									?>
-									<tr>
-										<td colspan="12">Total : </td>
-										<td class="total_td"><?php echo $total_amount_paid; ?></td>
-										<td class="total_td"><?php echo $total_profit_paid; ?></td>
-										<td class="total_td"></td>
-									</tr>
+								}
+								?>
+								<tr>
+									<td colspan="12">Total : </td>
+									<td class="total_td"><?php echo $total_amount_paid; ?></td>
+									<td class="total_td"><?php echo $total_profit_paid; ?></td>
+									<td class="total_td"></td>
+								</tr>
 
 
 
-									<tr>
-										<td class="ConfirmValue" colspan="15">printed at<font size="1" face="Verdana, Arial, Helvetica, sans-serif"><strong> <?php echo date("d/m/Y H:i:s"); ?></strong></font>
-										</td>
-									</tr>
-								</tbody>
-							<?php } ?>
+								<tr>
+									<td class="ConfirmValue" colspan="15">printed at<font size="1" face="Verdana, Arial, Helvetica, sans-serif"><strong> <?php echo date("d/m/Y H:i:s"); ?></strong></font>
+									</td>
+								</tr>
+							</tbody>
+						<?php } ?>
 						</table>
 					<?php
 					}
@@ -347,10 +522,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 								</strong> </span></p>
 					</div>
 				<?php } ?>
-				<table cellspacing="1" cellpadding="1" style="width:80%" class="table table-striped table-bordered" align="center">
+
+				<table cellspacing="1" cellpadding="1" style="width:80%; margin-bottom: 0%;" class="table table-striped table-bordered" align="center">
 					<caption class="menu-header">Monthly Collection Report</caption>
 					<?php if ($_SESSION['center_id'] != 5) { ?>
-						<thead>
+
+						<!-- PREV VERS START -->
+						<!-- <thead>
 							<tr>
 								<th>Customer - Card</th>
 								<th>Customer Name</th>
@@ -417,140 +595,322 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 									<td><?php echo $total_colletion; ?></td>
 									<td><?php echo $total_interest; ?></td>
 								</tr>
-
 							<?php
 							}
 							?>
-						</tbody>
-					<?php } else { ?>
+						</tbody> -->
+						<!-- PREV VERS END -->
+
+				</table>
+
+				<!-- table w freeze header & few cols START -->
+				<div style="width: 80%; height: 500px; overflow: auto; margin-left: auto; margin-right: auto;" class="table table-striped table-bordered"> <!-- OPT: width: 500px, margin-left: 50px, border: 1px solid; -->
+					<table id="tbl_exporttable_to_xls" class="freeze-table" width="700px">
+						<!-- <table cellspacing="1" cellpadding="1" style="width:80%" class="freeze-table table table-striped table-bordered" align="center"> -->
 						<thead>
 							<tr>
-								<th>Date</th>
-								<th>Lend Date</th>
-								<th>Code</th>
-								<th>Lend Amount</th>
-								<th>Interest</th>
-								<th>Deposit</th>
-								<th>STP</th>
-								<th>On Hand</th>
-								<th>Days</th>
-								<th>Deadline</th>
-								<th>Statement Date</th>
-								<th>Dealer</th>
-								<th>Repayment Amount</th>
-								<th>Repayment Interest</th>
-								<th>Remark</th>
+								<!-- <th style="min-width: 75px; width:75px;" class="col-id-no fixed-header">Id Number</th>
+								<th style="min-width: 100px; width:100px;" class="col-first-name fixed-header">First Name</th>
+								<th style="min-width: 100px; width:100px;">Last Name</th>
+								<th style="min-width: 300px; width:300px;">Address</th>
+								<th style="min-width: 100px; width: 100px;">Phone</th>
+								<th style="min-width: 75px; width:75px;">DOB</th> -->
+								<th style="min-width: 100px; width:100px;" class="col-id-no fixed-header">Customer - Card</td>
+								<th style="min-width: 100px; width:100px;" class="col-first-name fixed-header">Customer Name</td>
+								<th style="min-width: 100px; width:100px;" class="col-second-name fixed-header">Phone</td>
+								<th style="min-width: 50px; width:50px;">Day <br>1</th>
+								<th style="min-width: 50px; width:50px;">Day <br>2</th>
+								<th style="min-width: 50px; width:50px;">Day <br>3</th>
+								<th style="min-width: 50px; width:50px;">Day <br>4</th>
+								<th style="min-width: 50px; width:50px;">Day <br>5</th>
+								<th style="min-width: 50px; width:50px;">Day <br>6</th>
+								<th style="min-width: 50px; width:50px;">Day <br>7</th>
+								<th style="min-width: 50px; width:50px;">Day <br>8</th>
+								<th style="min-width: 50px; width:50px;">Day <br>9</th>
+								<th style="min-width: 50px; width:50px;">Day <br>10</th>
+								<th style="min-width: 50px; width:50px;">Day <br>11</th>
+								<th style="min-width: 50px; width:50px;">Day <br>12</th>
+								<th style="min-width: 50px; width:50px;">Day <br>13</th>
+								<th style="min-width: 50px; width:50px;">Day <br>14</th>
+								<th style="min-width: 50px; width:50px;">Day <br>15</th>
+								<th style="min-width: 50px; width:50px;">Day <br>16</th>
+								<th style="min-width: 50px; width:50px;">Day <br>17</th>
+								<th style="min-width: 50px; width:50px;">Day <br>18</th>
+								<th style="min-width: 50px; width:50px;">Day <br>19</th>
+								<th style="min-width: 50px; width:50px;">Day <br>20</th>
+								<th style="min-width: 50px; width:50px;">Day <br>31</th>
+								<th style="min-width: 50px; width:50px;">Day <br>32</th>
+								<th style="min-width: 50px; width:50px;">Day <br>33</th>
+								<th style="min-width: 50px; width:50px;">Day <br>34</th>
+								<th style="min-width: 50px; width:50px;">Day <br>35</th>
+								<th style="min-width: 50px; width:50px;">Day <br>36</th>
+								<th style="min-width: 50px; width:50px;">Day <br>37</th>
+								<th style="min-width: 50px; width:50px;">Day <br>38</th>
+								<th style="min-width: 50px; width:50px;">Day <br>39</th>
+								<th style="min-width: 50px; width:50px;">Day <br>30</th>
+								<th style="min-width: 50px; width:50px;">Day <br>31</th>
 							</tr>
 						</thead>
+
 						<tbody>
 							<?php
-							$total_loan_out = 0;
-							$total_profit = 0;
-							$total_deposit = 0;
-							$total_advance = 0;
-							$total_onhand = 0;
-							$total_amount_paid = 0;
-							$total_profit_paid = 0;
 
-							if ($_SESSION['group_name'] != "admin") {
-								if ((isset($searchText) && $searchText != "") && (isset($searchDate) && $searchDate != "")) {
-									$sql = "SELECT a.*, c.user_name FROM collection AS a LEFT JOIN customers_card AS b ON a.card_id = b.id LEFT JOIN users AS c ON b.user_agent_id = c.id WHERE a.center_id = '5' AND b.user_agent_id = '" . $_SESSION['user_agent_id'] . "' AND (b.start_date LIKE '%" . $searchDate . "%' OR b.crossed_date LIKE '%" . $searchDate . "%' OR b.code LIKE '%" . $searchText . "%' OR c.user_name LIKE '%" . $searchText . "%') ORDER BY a.d_date_disp;";
-								} elseif (isset($searchText) && $searchText != "") {
-									$sql = "SELECT a.*, c.user_name FROM collection AS a LEFT JOIN customers_card AS b ON a.card_id = b.id LEFT JOIN users AS c ON b.user_agent_id = c.id WHERE a.center_id = '5' AND b.user_agent_id = '" . $_SESSION['user_agent_id'] . "' AND (b.code LIKE '%" . $searchText . "%' OR c.user_name LIKE '%" . $searchText . "%') ORDER BY a.d_date_disp;";
-								} elseif (isset($searchDate) && $searchDate != "") {
-									$sql = "SELECT a.*, c.user_name FROM collection AS a LEFT JOIN customers_card AS b ON a.card_id = b.id LEFT JOIN users AS c ON b.user_agent_id = c.id WHERE a.center_id = '5' AND b.user_agent_id = '" . $_SESSION['user_agent_id'] . "' AND (b.start_date LIKE '%" . $searchDate . "%' OR b.crossed_date LIKE '%" . $searchDate . "%') ORDER BY a.d_date_disp;";
-								} else {
-									$sql = "SELECT a.* FROM collection AS a LEFT JOIN customers_card AS b ON a.card_id = b.id WHERE a.center_id = '5' AND b.user_agent_id = '" . $_SESSION['user_agent_id'] . "' ORDER BY a.d_date_disp;";
-								}
-							} else {
-								if ((isset($searchText) && $searchText != "") && (isset($searchDate) && $searchDate != "")) {
-									$sql = "SELECT a.*, c.user_name FROM collection AS a LEFT JOIN customers_card AS b ON a.card_id = b.id LEFT JOIN users AS c ON b.user_agent_id = c.id WHERE a.center_id = '5' AND (b.start_date LIKE '%" . $searchDate . "%' OR b.crossed_date LIKE '%" . $searchDate . "%' OR b.code LIKE '%" . $searchText . "%' OR c.user_name LIKE '%" . $searchText . "%') ORDER BY a.d_date_disp;";
-								} elseif (isset($searchText) && $searchText != "") {
-									$sql = "SELECT a.*, c.user_name FROM collection AS a LEFT JOIN customers_card AS b ON a.card_id = b.id LEFT JOIN users AS c ON b.user_agent_id = c.id WHERE a.center_id = '5' AND (b.code LIKE '%" . $searchText . "%' OR c.user_name LIKE '%" . $searchText . "%') ORDER BY a.d_date_disp;";
-								} elseif (isset($searchDate) && $searchDate != "") {
-									$sql = "SELECT a.*, c.user_name FROM collection AS a LEFT JOIN customers_card AS b ON a.card_id = b.id LEFT JOIN users AS c ON b.user_agent_id = c.id WHERE a.center_id = '5' AND (b.start_date LIKE '%" . $searchDate . "%' OR b.crossed_date LIKE '%" . $searchDate . "%') ORDER BY a.d_date_disp;";
-								} else {
-									$sql = "SELECT a.* FROM collection AS a LEFT JOIN customers_card AS b ON a.card_id = b.id WHERE a.center_id = '5' ORDER BY a.d_date_disp;";
+							$get_customer_card = mysqli_query($conn, 'SELECT * FROM customers_card WHERE center_id = ' . $t_center_id . $where);
+							$customer_card_id = array();
+							// echo '$customer_card_id' . json_encode($customer_card_id);   // D
+							if (mysqli_num_rows($get_customer_card) > 0) {
+								while ($customer_cardrow = mysqli_fetch_assoc($get_customer_card)) {
+									$customer_card_id[] = $customer_cardrow['id'];
 								}
 							}
+							// echo '$customer_card_id' . json_encode($customer_card_id);   // D
 
-							$res = mysqli_query($conn, $sql);
-							while ($myrow = mysqli_fetch_array($res)) {
-								$date = date("d-m-Y", $myrow['d_date_disp']);
-								$d_date = explode("-", $date);
+							$whereand_card = ' and card_id IN (' . implode(',', $customer_card_id) . ')';
 
-								if ($d_startMonth == $d_date[1] && $d_startYear == $d_date[2]) {
-									$total_amount_paid += $myrow['amount'];
-									$total_profit_paid += $myrow['interest'];
-									$onhand = 0;
-									$sql2 = "SELECT * FROM customers_card WHERE id = '" . $myrow['card_id'] . "';";
-									$res2 = mysqli_query($conn, $sql2);
-									$myrow2 = mysqli_fetch_assoc($res2);
+							$sql_collection = "SELECT * FROM collection WHERE center_id = " . $t_center_id . $whereand_card . " ORDER BY id ASC";
+							// echo '$sql_collection' . $sql_collection;   // D
 
-									$onhand = $myrow2['loan_out'] - $myrow2['profit'] - $myrow2['deposit'] - $myrow2['advance'];
-									$total_loan_out += $myrow2['loan_out'];
-									$total_profit += $myrow2['profit'];
-									$total_deposit += $myrow2['deposit'];
-									$total_advance += $myrow2['advance'];
-									$total_onhand += $onhand;
+							$resultcollection = mysqli_query($conn, $sql_collection);
+
+							if ($resultcollection->num_rows > 0) {
+								$total_colletion = 0;
+								$total_interest = 0;
+								$day_list = "";
+								while ($rowss = $resultcollection->fetch_assoc()) {
+									$date_hwe = date('d-m-Y', $rowss['d_date_disp']);
+									$date = explode("-", $date_hwe);
+									if ($date[1] == $d_startMonth &&  $date[2] == $d_startYear) {
+										$total_colletion += $rowss['amount'];
+										$total_interest += $rowss['interest'];
+										// echo '$date[0] = ' . $date[0];
+										// $day_list .= (($date[0]) . ", ");
+										$total = $rowss['amount'] + $rowss['interest'];
+
 							?>
-									<tr>
-										<td><?php echo $date; ?></td>
-										<td><?php echo $myrow2['start_date']; ?></td>
-										<td><?php echo $myrow2['code']; ?></td>
-										<td><?php echo $myrow2['loan_out']; ?></td>
-										<td><?php echo $myrow2['profit']; ?></td>
-										<td><?php echo $myrow2['deposit']; ?></td>
-										<td><?php echo $myrow2['advance']; ?></td>
-										<td><?php echo $onhand; ?></td>
-										<td><?php echo $myrow2['no_of_terms']; ?></td>
-										<td><?php echo $myrow2['crossed_date']; ?></td>
-										<td>
+										<tr>
+											<!-- <td>
+												<?php
+												$sql_customer_id = "SELECT customer_id FROM customers_card WHERE id = " . $rowss['card_id'];
+												$res = mysqli_query($conn, $sql_customer_id);
 
-											<?php
-											if ($myrow2['clear_payment'] != '1') {
-											} else {
-												$sql3 = "SELECT * FROM collection WHERE card_id = '" . $myrow2['id'] . "' AND remark1 = '清' ORDER BY id DESC LIMIT 1;";
-												$res3 = mysqli_query($conn, $sql3);
-												$myrow3 = mysqli_fetch_assoc($res3);
+												if ($res->num_rows > 0) {
+													$row_res = $res->fetch_assoc();
+													echo $row_res['customer_id'] . '-';
+												}
+												$customer_id = $row_res['customer_id'];
 
-												echo date("d-m-Y", $myrow3['d_date_disp']);
-											}
+												$customer_data = "SELECT * FROM customers WHERE id = " . $customer_id;
+												$cust_data = mysqli_query($conn, $customer_data);
+												$customer = $cust_data->fetch_assoc();
 
-											$sql3 = "SELECT * FROM users WHERE id = '" . $myrow2['user_agent_id'] . "';";
+												echo $rowss['card_id']; ?>
+											</td>
+											<td><?php echo $customer['name']; ?></td>
+											<td><?php echo $rowss['amount']; ?></td>
+											<td><?php echo $rowss['interest']; ?></td> -->
+
+											<!--  -->
+											<td class="col-id-no" scope="row"> <!-- OPT: 35-64 -->
+												<?php
+												$sql_customer_id = "SELECT customer_id FROM customers_card WHERE id = " . $rowss['card_id'];
+												$res = mysqli_query($conn, $sql_customer_id);
+
+												if ($res->num_rows > 0) {
+													$row_res = $res->fetch_assoc();
+													echo $row_res['customer_id'] . '-';
+												}
+												$customer_id = $row_res['customer_id'];
+
+												$customer_data = "SELECT * FROM customers WHERE id = " . $customer_id;
+												$cust_data = mysqli_query($conn, $customer_data);
+												$customer = $cust_data->fetch_assoc();
+
+												echo $rowss['card_id']; ?>
+											</td>
+											<td class="col-first-name" scope="row"><?= $customer['name'] ?></td> <!-- OPT: test user -->
+											<td class="col-second-name" scope="row"><?= $customer['telephone_1'] ?></td> <!-- OPT: 01234567890 -->
+											<td><?= $date[0] == 1 ? $total : '-' ?></td> <!-- OPT: 1 -->
+											<td><?= $date[0] == 2 ? $total : '-' ?></td> <!-- OPT: 2 -->
+											<td><?= $date[0] == 3 ? $total : '-' ?></td> <!-- OPT: 3 -->
+											<td><?= $date[0] == 4 ? $total : '-' ?></td> <!-- OPT: 4 -->
+											<td><?= $date[0] == 5 ? $total : '-' ?></td> <!-- OPT: 5 -->
+											<td><?= $date[0] == 6 ? $total : '-' ?></td> <!-- OPT: 6 -->
+											<td><?= $date[0] == 7 ? $total : '-' ?></td> <!-- OPT: 7 -->
+											<td><?= $date[0] == 8 ? $total : '-' ?></td> <!-- OPT: 8 -->
+											<td><?= $date[0] == 9 ? $total : '-' ?></td> <!-- OPT: 9 -->
+											<td><?= $date[0] == 10 ? $total : '-' ?></td> <!-- OPT: 10 -->
+											<td><?= $date[0] == 11 ? $total : '-' ?></td> <!-- OPT: 11 -->
+											<td><?= $date[0] == 12 ? $total : '-' ?></td> <!-- OPT: 12 -->
+											<td><?= $date[0] == 13 ? $total : '-' ?></td> <!-- OPT: 13 -->
+											<td><?= $date[0] == 14 ? $total : '-' ?></td> <!-- OPT: 14 -->
+											<td><?= $date[0] == 15 ? $total : '-' ?></td> <!-- OPT: 15 -->
+											<td><?= $date[0] == 16 ? $total : '-' ?></td> <!-- OPT: 16 -->
+											<td><?= $date[0] == 17 ? $total : '-' ?></td> <!-- OPT: 17 -->
+											<td><?= $date[0] == 18 ? $total : '-' ?></td> <!-- OPT: 18 -->
+											<td><?= $date[0] == 19 ? $total : '-' ?></td> <!-- OPT: 19 -->
+											<td><?= $date[0] == 20 ? $total : '-' ?></td> <!-- OPT: 20 -->
+											<td><?= $date[0] == 31 ? $total : '-' ?></td> <!-- OPT: 31 -->
+											<td><?= $date[0] == 32 ? $total : '-' ?></td> <!-- OPT: 32 -->
+											<td><?= $date[0] == 33 ? $total : '-' ?></td> <!-- OPT: 33 -->
+											<td><?= $date[0] == 34 ? $total : '-' ?></td> <!-- OPT: 34 -->
+											<td><?= $date[0] == 35 ? $total : '-' ?></td> <!-- OPT: 35 -->
+											<td><?= $date[0] == 36 ? $total : '-' ?></td> <!-- OPT: 36 -->
+											<td><?= $date[0] == 37 ? $total : '-' ?></td> <!-- OPT: 37 -->
+											<td><?= $date[0] == 38 ? $total : '-' ?></td> <!-- OPT: 38 -->
+											<td><?= $date[0] == 39 ? $total : '-' ?></td> <!-- OPT: 39 -->
+											<td><?= $date[0] == 30 ? $total : '-' ?></td> <!-- OPT: 30 -->
+											<td><?= $date[0] == 31 ? $total : '-' ?></td> <!-- OPT: 31 -->
+										</tr>
+								<?php
+									}
+								}
+								?>
+								<tr>
+									<td class="col-id-no" scope="row" colspan="2">Total (Collection + Interest): </td>
+									<td class="col-second-name" scope="row"><?= $total_colletion + $total_interest ?></td>
+									<td scope="row" colspan="31"></td>
+									<!-- <td><?php echo $total_colletion; ?></td>
+									<td><?php echo $total_interest; ?></td> -->
+								</tr>
+							<?php
+							}
+							?>
+						</tbody>
+					</table>
+				</div>
+				<!-- table w freeze header & few cols END -->
+
+				<table>
+
+				<?php } else { ?>
+					<thead>
+						<tr>
+							<th>Date</th>
+							<th>Lend Date</th>
+							<th>Code</th>
+							<th>Lend Amount</th>
+							<th>Interest</th>
+							<th>Deposit</th>
+							<th>STP</th>
+							<th>On Hand</th>
+							<th>Days</th>
+							<th>Deadline</th>
+							<th>Statement Date</th>
+							<th>Dealer</th>
+							<th>Repayment Amount</th>
+							<th>Repayment Interest</th>
+							<th>Remark</th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php
+						$total_loan_out = 0;
+						$total_profit = 0;
+						$total_deposit = 0;
+						$total_advance = 0;
+						$total_onhand = 0;
+						$total_amount_paid = 0;
+						$total_profit_paid = 0;
+
+						if ($_SESSION['group_name'] != "admin") {
+							if ((isset($searchText) && $searchText != "") && (isset($searchDate) && $searchDate != "")) {
+								$sql = "SELECT a.*, c.user_name FROM collection AS a LEFT JOIN customers_card AS b ON a.card_id = b.id LEFT JOIN users AS c ON b.user_agent_id = c.id WHERE a.center_id = '5' AND b.user_agent_id = '" . $_SESSION['user_agent_id'] . "' AND (b.start_date LIKE '%" . $searchDate . "%' OR b.crossed_date LIKE '%" . $searchDate . "%' OR b.code LIKE '%" . $searchText . "%' OR c.user_name LIKE '%" . $searchText . "%') ORDER BY a.d_date_disp;";
+							} elseif (isset($searchText) && $searchText != "") {
+								$sql = "SELECT a.*, c.user_name FROM collection AS a LEFT JOIN customers_card AS b ON a.card_id = b.id LEFT JOIN users AS c ON b.user_agent_id = c.id WHERE a.center_id = '5' AND b.user_agent_id = '" . $_SESSION['user_agent_id'] . "' AND (b.code LIKE '%" . $searchText . "%' OR c.user_name LIKE '%" . $searchText . "%') ORDER BY a.d_date_disp;";
+							} elseif (isset($searchDate) && $searchDate != "") {
+								$sql = "SELECT a.*, c.user_name FROM collection AS a LEFT JOIN customers_card AS b ON a.card_id = b.id LEFT JOIN users AS c ON b.user_agent_id = c.id WHERE a.center_id = '5' AND b.user_agent_id = '" . $_SESSION['user_agent_id'] . "' AND (b.start_date LIKE '%" . $searchDate . "%' OR b.crossed_date LIKE '%" . $searchDate . "%') ORDER BY a.d_date_disp;";
+							} else {
+								$sql = "SELECT a.* FROM collection AS a LEFT JOIN customers_card AS b ON a.card_id = b.id WHERE a.center_id = '5' AND b.user_agent_id = '" . $_SESSION['user_agent_id'] . "' ORDER BY a.d_date_disp;";
+							}
+						} else {
+							if ((isset($searchText) && $searchText != "") && (isset($searchDate) && $searchDate != "")) {
+								$sql = "SELECT a.*, c.user_name FROM collection AS a LEFT JOIN customers_card AS b ON a.card_id = b.id LEFT JOIN users AS c ON b.user_agent_id = c.id WHERE a.center_id = '5' AND (b.start_date LIKE '%" . $searchDate . "%' OR b.crossed_date LIKE '%" . $searchDate . "%' OR b.code LIKE '%" . $searchText . "%' OR c.user_name LIKE '%" . $searchText . "%') ORDER BY a.d_date_disp;";
+							} elseif (isset($searchText) && $searchText != "") {
+								$sql = "SELECT a.*, c.user_name FROM collection AS a LEFT JOIN customers_card AS b ON a.card_id = b.id LEFT JOIN users AS c ON b.user_agent_id = c.id WHERE a.center_id = '5' AND (b.code LIKE '%" . $searchText . "%' OR c.user_name LIKE '%" . $searchText . "%') ORDER BY a.d_date_disp;";
+							} elseif (isset($searchDate) && $searchDate != "") {
+								$sql = "SELECT a.*, c.user_name FROM collection AS a LEFT JOIN customers_card AS b ON a.card_id = b.id LEFT JOIN users AS c ON b.user_agent_id = c.id WHERE a.center_id = '5' AND (b.start_date LIKE '%" . $searchDate . "%' OR b.crossed_date LIKE '%" . $searchDate . "%') ORDER BY a.d_date_disp;";
+							} else {
+								$sql = "SELECT a.* FROM collection AS a LEFT JOIN customers_card AS b ON a.card_id = b.id WHERE a.center_id = '5' ORDER BY a.d_date_disp;";
+							}
+						}
+
+						$res = mysqli_query($conn, $sql);
+						while ($myrow = mysqli_fetch_array($res)) {
+							$date = date("d-m-Y", $myrow['d_date_disp']);
+							$d_date = explode("-", $date);
+
+							if ($d_startMonth == $d_date[1] && $d_startYear == $d_date[2]) {
+								$total_amount_paid += $myrow['amount'];
+								$total_profit_paid += $myrow['interest'];
+								$onhand = 0;
+								$sql2 = "SELECT * FROM customers_card WHERE id = '" . $myrow['card_id'] . "';";
+								$res2 = mysqli_query($conn, $sql2);
+								$myrow2 = mysqli_fetch_assoc($res2);
+
+								$onhand = $myrow2['loan_out'] - $myrow2['profit'] - $myrow2['deposit'] - $myrow2['advance'];
+								$total_loan_out += $myrow2['loan_out'];
+								$total_profit += $myrow2['profit'];
+								$total_deposit += $myrow2['deposit'];
+								$total_advance += $myrow2['advance'];
+								$total_onhand += $onhand;
+						?>
+								<tr>
+									<td><?php echo $date; ?></td>
+									<td><?php echo $myrow2['start_date']; ?></td>
+									<td><?php echo $myrow2['code']; ?></td>
+									<td><?php echo $myrow2['loan_out']; ?></td>
+									<td><?php echo $myrow2['profit']; ?></td>
+									<td><?php echo $myrow2['deposit']; ?></td>
+									<td><?php echo $myrow2['advance']; ?></td>
+									<td><?php echo $onhand; ?></td>
+									<td><?php echo $myrow2['no_of_terms']; ?></td>
+									<td><?php echo $myrow2['crossed_date']; ?></td>
+									<td>
+
+										<?php
+										if ($myrow2['clear_payment'] != '1') {
+										} else {
+											$sql3 = "SELECT * FROM collection WHERE card_id = '" . $myrow2['id'] . "' AND remark1 = '清' ORDER BY id DESC LIMIT 1;";
 											$res3 = mysqli_query($conn, $sql3);
 											$myrow3 = mysqli_fetch_assoc($res3);
-											?>
 
-										</td>
+											echo date("d-m-Y", $myrow3['d_date_disp']);
+										}
 
-										<td><?php echo $myrow3['user_name']; ?></td>
-										<td><?php echo $myrow['amount']; ?></td>
-										<td><?php echo $myrow['interest']; ?></td>
-										<td><?php echo $myrow['remark1'];
-											if ($myrow['remark1'] == "分期" || $myrow['remark1'] == "分天") {
-												echo $myrow['days'];
-											} ?></td>
-									</tr>
-							<?php
-								}
+										$sql3 = "SELECT * FROM users WHERE id = '" . $myrow2['user_agent_id'] . "';";
+										$res3 = mysqli_query($conn, $sql3);
+										$myrow3 = mysqli_fetch_assoc($res3);
+										?>
+
+									</td>
+
+									<td><?php echo $myrow3['user_name']; ?></td>
+									<td><?php echo $myrow['amount']; ?></td>
+									<td><?php echo $myrow['interest']; ?></td>
+									<td><?php echo $myrow['remark1'];
+										if ($myrow['remark1'] == "分期" || $myrow['remark1'] == "分天") {
+											echo $myrow['days'];
+										} ?></td>
+								</tr>
+						<?php
 							}
-							?>
-							<tr>
-								<td colspan="12">Total : </td>
-								<td class="total_td"><?php echo $total_amount_paid; ?></td>
-								<td class="total_td"><?php echo $total_profit_paid; ?></td>
-								<td class="total_td"></td>
-							</tr>
+						}
+						?>
+						<tr>
+							<td colspan="12">Total : </td>
+							<td class="total_td"><?php echo $total_amount_paid; ?></td>
+							<td class="total_td"><?php echo $total_profit_paid; ?></td>
+							<td class="total_td"></td>
+						</tr>
 
 
 
-							<tr>
-								<td class="ConfirmValue" colspan="15">printed at<font size="1" face="Verdana, Arial, Helvetica, sans-serif"><strong> <?php echo date("d/m/Y H:i:s"); ?></strong></font>
-								</td>
-							</tr>
-						</tbody>
-					<?php } ?>
+						<tr>
+							<td class="ConfirmValue" colspan="15">printed at<font size="1" face="Verdana, Arial, Helvetica, sans-serif"><strong> <?php echo date("d/m/Y H:i:s"); ?></strong></font>
+							</td>
+						</tr>
+					</tbody>
+				<?php } ?>
 				</table>
 			<?php
 
@@ -2266,4 +2626,79 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	.total_td {
 		text-align: left !important;
 	}
+
+	/* table w freeze header & few cols START */
+	/* .freeze-table {
+		border-spacing: 0;
+		font-family: "Segoe UI", sans-serif, "Helvetica Neue";
+		font-size: 14px;
+		padding: 0;
+		border: 1px solid #ccc;
+	} */
+
+	thead th {
+		top: 0;
+		position: sticky;
+		background-color: #666;
+		color: #fff;
+		z-index: 20;
+		min-height: 30px;
+		height: 30px;
+		text-align: left;
+	}
+
+	tr:nth-child(even) {
+		background-color: #f2f2f2;
+	}
+
+	th,
+	td {
+		padding: 0;
+		outline: 0.5px solid #ccc;
+		/* OPT: #6c757d */
+		border: none;
+		/* outline-offset: -1px; */
+		padding-left: 5px;
+	}
+
+	tr {
+		min-height: 25px;
+		height: 25px;
+	}
+
+	.col-id-no {
+		left: 0;
+		position: sticky;
+	}
+
+	.col-first-name {
+		left: 100px;
+		position: sticky;
+	}
+
+	.col-second-name {
+		left: 200px;
+		position: sticky;
+	}
+
+	.fixed-header {
+		z-index: 50;
+	}
+
+	tr:nth-child(even) td[scope=row] {
+		background-color: #f2f2f2;
+	}
+
+	tr:nth-child(odd) td[scope=row] {
+		background-color: white;
+	}
+
+	th {
+		text-align: center !important;
+		vertical-align: middle !important;
+		background-color: white !important;
+		color: black !important;
+	}
+
+	/* table w freeze header & few cols END */
 </style>
