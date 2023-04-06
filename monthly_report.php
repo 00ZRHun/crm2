@@ -342,15 +342,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 													<td><?= $date[0] == 18 ? $total : '-' ?></td> <!-- OPT: 18 -->
 													<td><?= $date[0] == 19 ? $total : '-' ?></td> <!-- OPT: 19 -->
 													<td><?= $date[0] == 20 ? $total : '-' ?></td> <!-- OPT: 20 -->
-													<td><?= $date[0] == 31 ? $total : '-' ?></td> <!-- OPT: 31 -->
-													<td><?= $date[0] == 32 ? $total : '-' ?></td> <!-- OPT: 32 -->
-													<td><?= $date[0] == 33 ? $total : '-' ?></td> <!-- OPT: 33 -->
-													<td><?= $date[0] == 34 ? $total : '-' ?></td> <!-- OPT: 34 -->
-													<td><?= $date[0] == 35 ? $total : '-' ?></td> <!-- OPT: 35 -->
-													<td><?= $date[0] == 36 ? $total : '-' ?></td> <!-- OPT: 36 -->
-													<td><?= $date[0] == 37 ? $total : '-' ?></td> <!-- OPT: 37 -->
-													<td><?= $date[0] == 38 ? $total : '-' ?></td> <!-- OPT: 38 -->
-													<td><?= $date[0] == 39 ? $total : '-' ?></td> <!-- OPT: 39 -->
+													<td><?= $date[0] == 21 ? $total : '-' ?></td> <!-- OPT: 21 -->
+													<td><?= $date[0] == 22 ? $total : '-' ?></td> <!-- OPT: 22 -->
+													<td><?= $date[0] == 23 ? $total : '-' ?></td> <!-- OPT: 23 -->
+													<td><?= $date[0] == 24 ? $total : '-' ?></td> <!-- OPT: 24 -->
+													<td><?= $date[0] == 25 ? $total : '-' ?></td> <!-- OPT: 25 -->
+													<td><?= $date[0] == 26 ? $total : '-' ?></td> <!-- OPT: 26 -->
+													<td><?= $date[0] == 27 ? $total : '-' ?></td> <!-- OPT: 27 -->
+													<td><?= $date[0] == 28 ? $total : '-' ?></td> <!-- OPT: 28 -->
+													<td><?= $date[0] == 29 ? $total : '-' ?></td> <!-- OPT: 29 -->
 													<td><?= $date[0] == 30 ? $total : '-' ?></td> <!-- OPT: 30 -->
 													<td><?= $date[0] == 31 ? $total : '-' ?></td> <!-- OPT: 31 -->
 												</tr>
@@ -749,15 +749,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 											<td><?= $date[0] == 18 ? $total : '-' ?></td> <!-- OPT: 18 -->
 											<td><?= $date[0] == 19 ? $total : '-' ?></td> <!-- OPT: 19 -->
 											<td><?= $date[0] == 20 ? $total : '-' ?></td> <!-- OPT: 20 -->
-											<td><?= $date[0] == 31 ? $total : '-' ?></td> <!-- OPT: 31 -->
-											<td><?= $date[0] == 32 ? $total : '-' ?></td> <!-- OPT: 32 -->
-											<td><?= $date[0] == 33 ? $total : '-' ?></td> <!-- OPT: 33 -->
-											<td><?= $date[0] == 34 ? $total : '-' ?></td> <!-- OPT: 34 -->
-											<td><?= $date[0] == 35 ? $total : '-' ?></td> <!-- OPT: 35 -->
-											<td><?= $date[0] == 36 ? $total : '-' ?></td> <!-- OPT: 36 -->
-											<td><?= $date[0] == 37 ? $total : '-' ?></td> <!-- OPT: 37 -->
-											<td><?= $date[0] == 38 ? $total : '-' ?></td> <!-- OPT: 38 -->
-											<td><?= $date[0] == 39 ? $total : '-' ?></td> <!-- OPT: 39 -->
+											<td><?= $date[0] == 21 ? $total : '-' ?></td> <!-- OPT: 21 -->
+											<td><?= $date[0] == 22 ? $total : '-' ?></td> <!-- OPT: 22 -->
+											<td><?= $date[0] == 23 ? $total : '-' ?></td> <!-- OPT: 23 -->
+											<td><?= $date[0] == 24 ? $total : '-' ?></td> <!-- OPT: 24 -->
+											<td><?= $date[0] == 25 ? $total : '-' ?></td> <!-- OPT: 25 -->
+											<td><?= $date[0] == 26 ? $total : '-' ?></td> <!-- OPT: 26 -->
+											<td><?= $date[0] == 27 ? $total : '-' ?></td> <!-- OPT: 27 -->
+											<td><?= $date[0] == 28 ? $total : '-' ?></td> <!-- OPT: 28 -->
+											<td><?= $date[0] == 29 ? $total : '-' ?></td> <!-- OPT: 29 -->
 											<td><?= $date[0] == 30 ? $total : '-' ?></td> <!-- OPT: 30 -->
 											<td><?= $date[0] == 31 ? $total : '-' ?></td> <!-- OPT: 31 -->
 										</tr>
